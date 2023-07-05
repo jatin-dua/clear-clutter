@@ -5,16 +5,17 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/jatin-dua/clear-clutter/backend/router"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
+const PORT = 8080
+
 func main() {
-	port := flag.Int("p", adb.AdbPort, "")
+	adbPort := flag.Int("p", adb.AdbPort, "")
 	flag.Parse()
 
 	client, err := adb.NewWithConfig(adb.ServerConfig{
-		Port: *port,
+		Port: *adbPort,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -47,7 +48,7 @@ func main() {
 	packages := getInstalledPackages(*device)
 	fmt.Println(packages)
 
-	router.Setup()
+	SetupRoutes(PORT)
 }
 
 func getInstalledPackages(device adb.Device) string {
