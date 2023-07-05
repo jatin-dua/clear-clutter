@@ -41,5 +41,20 @@ func main() {
 		fmt.Printf("\t%+v\n", *device)
 	}
 
+	descriptor := adb.AnyDevice()
+	device := client.Device(descriptor)
+
+	packages := getInstalledPackages(*device)
+	fmt.Println(packages)
+
 	router.Setup()
+}
+
+func getInstalledPackages(device adb.Device) string {
+	packages, err := device.RunCommand("pm list packages")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return packages
 }
