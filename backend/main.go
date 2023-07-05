@@ -45,17 +45,8 @@ func main() {
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
 
-	packages := getInstalledPackages(*device)
-	fmt.Println(packages)
+	packageList := getInstalledPackages(*device)
+	displayAllPackages(packageList)
 
 	SetupRoutes(PORT)
-}
-
-func getInstalledPackages(device adb.Device) string {
-	packages, err := device.RunCommand("pm list packages")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return packages
 }
