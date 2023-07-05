@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Package Selection</title>
+  </head>
+  <body>
+    <form action="/process" method="POST">
+      {{ range .Packages }}
+      <input type="checkbox" name="package" value="{{ . }}" /> {{ . }}<br />
+      {{ end }}
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

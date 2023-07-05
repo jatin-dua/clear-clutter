@@ -45,8 +45,10 @@ func main() {
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
 
-	packageList := getInstalledPackages(*device)
-	displayAllPackages(packageList)
+	PackageList := getInstalledPackages(*device)
+	displayAllPackages(PackageList)
+
+	SetData(&PackageList)
 
 	SetupRoutes(PORT)
 }
