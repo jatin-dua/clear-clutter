@@ -9,7 +9,7 @@ import (
 
 type Data struct {
 	Applications *[]string
-	Device       *adb.DeviceInfo
+	DeviceInfo   *adb.DeviceInfo
 }
 
 var data Data
@@ -23,7 +23,7 @@ func SetTemplateData(apps *[]string, dev *adb.Device) {
 
 	data = Data{
 		Applications: apps,
-		Device:       deviceInfo,
+		DeviceInfo:   deviceInfo,
 	}
 
 	device = dev

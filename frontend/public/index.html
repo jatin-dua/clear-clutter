@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
   </head>
   <body>
-    <p>Model: {{ .Device.Model }}</p>
-    <p>Product: {{ .Device.Product }}</p>
-    <p>Serial: {{ .Device.Serial }}</p>
-    <p>DeviceInfo: {{ .Device.DeviceInfo }}</p>
+    <p>Model: {{ .DeviceInfo.Model }}</p>
+    <p>Product: {{ .DeviceInfo.Product }}</p>
+    <p>Serial: {{ .DeviceInfo.Serial }}</p>
+    <p>DeviceInfo: {{ .DeviceInfo.DeviceInfo }}</p>
 
     <form action="/process" method="POST">
       {{ range .Applications }}
@@ -27,7 +27,8 @@
           />
           <label class="form-check-label stretched-link" for="{{ . }}"
             >{{ . }}</label
-          > <br />
+          >
+          <br />
         </li>
       </ul>
 
