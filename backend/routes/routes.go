@@ -23,6 +23,10 @@ func SetupRoutes(port int) {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
+	// Serve static files from the "static" directory
+	staticDir := "../frontend/static"
+	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
+
 	r.Get("/", serveHome)
 
 	fmt.Printf("Application is running on http://localhost:%v \n", port)
