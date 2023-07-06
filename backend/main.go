@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/jatin-dua/clear-clutter/backend/app"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
@@ -45,10 +46,10 @@ func main() {
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
 
-	PackageList := getInstalledPackages(*device)
-	displayAllPackages(PackageList)
+	appList := app.InstalledApps(*device)
+	app.DisplayAllApps(appList)
 
-	SetData(&PackageList)
+	SetData(&appList)
 
 	SetupRoutes(PORT)
 }
