@@ -10,10 +10,11 @@ import (
 	adb "github.com/zach-klippenstein/goadb"
 )
 
-const PORT = 8080
+const listenAddr = 8080
 
 func main() {
-	adbPort := flag.Int("p", adb.AdbPort, "")
+	adbPort := flag.Int("adb", adb.AdbPort, "Port for ADB server")
+	listenAddr := flag.Int("port", listenAddr, "Port for starting Application")
 	flag.Parse()
 
 	client, err := adb.NewWithConfig(adb.ServerConfig{
@@ -52,5 +53,5 @@ func main() {
 
 	routes.SetData(&appList)
 
-	routes.SetupRoutes(PORT)
+	routes.SetupRoutes(*listenAddr)
 }
