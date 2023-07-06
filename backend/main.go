@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/jatin-dua/clear-clutter/backend/app"
+	"github.com/jatin-dua/clear-clutter/backend/routes"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
@@ -49,7 +50,7 @@ func main() {
 	appList := app.InstalledApps(*device)
 	app.DisplayAllApps(appList)
 
-	SetData(&appList)
+	routes.SetData(&appList)
 
-	SetupRoutes(PORT)
+	routes.SetupRoutes(PORT)
 }
