@@ -8,9 +8,30 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
   </head>
   <body>
+    <p>Model: {{ .Device.Model }}</p>
+    <p>Product: {{ .Device.Product }}</p>
+    <p>Serial: {{ .Device.Serial }}</p>
+    <p>DeviceInfo: {{ .Device.DeviceInfo }}</p>
+
     <form action="/process" method="POST">
       {{ range .Packages }}
-      <input type="checkbox" name="package" value="{{ . }}" /> {{ . }}<br />
+
+      <ul class="list-group">
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="checkbox"
+            name="package"
+            value="{{ . }}"
+            id="{{ . }}"
+          />
+          <label class="form-check-label stretched-link" for="{{ . }}"
+            >{{ . }}</label
+          > <br />
+        </li>
+      </ul>
+
+      <!-- <input type="checkbox" name="package" value="{{ . }}" /> {{ . }}<br /> -->
       {{ end }}
       <input type="submit" value="Submit" />
     </form>
