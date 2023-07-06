@@ -48,15 +48,11 @@ func main() {
 
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
-	deviceInfo, err := device.DeviceInfo()
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	installedApps := app.InstalledApps(*device)
 	app.DisplayAllApps(installedApps)
 
-	store.SetTemplateData(&installedApps, deviceInfo)
+	store.SetTemplateData(&installedApps, device)
 
 	routes.SetupRoutes(*listenAddr)
 }

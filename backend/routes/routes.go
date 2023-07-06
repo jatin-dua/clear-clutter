@@ -12,6 +12,7 @@ import (
 )
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
+	store.RefreshData()
 	tmpl := template.Must(template.ParseFiles("../frontend/public/index.html"))
 	err := tmpl.Execute(w, store.TemplateData())
 	if err != nil {
