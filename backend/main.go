@@ -53,10 +53,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	appList := app.InstalledApps(*device)
-	app.DisplayAllApps(appList)
+	installedApps := app.InstalledApps(*device)
+	app.DisplayAllApps(installedApps)
 
-	store.SetTemplateData(&appList, deviceInfo)
+	store.SetTemplateData(&installedApps, deviceInfo)
 
 	routes.SetupRoutes(*listenAddr)
 }

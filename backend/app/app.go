@@ -9,20 +9,28 @@ import (
 )
 
 func InstalledApps(device adb.Device) []string {
+	var installedApps []string
 	apps, err := device.RunCommand("pm list packages")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	appList := strings.Split(apps, "\n")
-	return appList
+
+	for _, app := range appList {
+		trimmed := strings.TrimPrefix(app, "package:")
+		trimmed = strings.TrimSpace(trimmed)
+		if trimmed == "" {
+			continue
+		}
+		installedApps = append(installedApps, trimmed)
+	}
+
+	return installedApps
 }
 
 func DisplayAllApps(appList []string) {
 	for _, name := range appList {
-		formatted_name := strings.Split(name, ":")
-		if len(formatted_name) >= 2 {
-			fmt.Println(formatted_name[1])
-		}
+		fmt.Println(name)
 	}
 }
