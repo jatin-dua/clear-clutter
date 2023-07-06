@@ -8,23 +8,12 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/jatin-dua/clear-clutter/backend/store"
 )
-
-type Data struct {
-	Packages *[]string
-}
-
-var data *Data
-
-func SetData(d *[]string) {
-	data = &Data{
-		Packages: d,
-	}
-}
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("../frontend/public/index.html"))
-	err := tmpl.Execute(w, data)
+	err := tmpl.Execute(w, store.TemplateData())
 	if err != nil {
 		log.Fatal(err)
 	}

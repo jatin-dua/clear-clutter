@@ -7,6 +7,7 @@ import (
 
 	"github.com/jatin-dua/clear-clutter/backend/app"
 	"github.com/jatin-dua/clear-clutter/backend/routes"
+	"github.com/jatin-dua/clear-clutter/backend/store"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
@@ -47,11 +48,15 @@ func main() {
 
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
+	deviceInfo, err := device.DeviceInfo()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	appList := app.InstalledApps(*device)
 	app.DisplayAllApps(appList)
 
-	routes.SetData(&appList)
+	store.SetTemplateData(&appList, deviceInfo)
 
 	routes.SetupRoutes(*listenAddr)
 }
