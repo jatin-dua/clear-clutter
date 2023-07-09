@@ -3,37 +3,30 @@ package store
 import (
 	"log"
 
-	"github.com/jatin-dua/clear-clutter/backend/app"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
 type Data struct {
 	Applications *[]string
+	Device       *adb.Device
 	DeviceInfo   *adb.DeviceInfo
 }
 
-var data Data
-var device *adb.Device
+var data *Data
 
-func SetTemplateData(apps *[]string, dev *adb.Device) {
-	deviceInfo, err := dev.DeviceInfo()
+func SetTemplateData(apps *[]string, device *adb.Device) {
+	deviceInfo, err := device.DeviceInfo()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	data = Data{
+	data = &Data{
 		Applications: apps,
+		Device:       device,
 		DeviceInfo:   deviceInfo,
 	}
-
-	device = dev
 }
 
 func TemplateData() *Data {
-	return &data
-}
-
-func RefreshData() {
-	installedApps := app.InstalledApps(*device)
-	SetTemplateData(&installedApps, device)
+	return data
 }

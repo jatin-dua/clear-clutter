@@ -5,6 +5,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/jatin-dua/clear-clutter/backend/store"
 	adb "github.com/zach-klippenstein/goadb"
 )
 
@@ -32,5 +33,16 @@ func InstalledApps(device adb.Device) []string {
 func DisplayAllApps(appList []string) {
 	for _, name := range appList {
 		fmt.Println(name)
+	}
+}
+
+func UninstallApps(appList []string) {
+	for _, app := range appList {
+		response, err := store.TemplateData().Device.RunCommand(fmt.Sprintf("pm uninstall -k --user 0 %v", app))
+		if err != nil {
+			log.Println("uninstall error: ", err)
+		}
+
+		fmt.Println(app, "Uninstall", response)
 	}
 }
