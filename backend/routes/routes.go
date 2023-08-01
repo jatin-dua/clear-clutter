@@ -37,6 +37,8 @@ func processForm(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("%v = %v\n", key, applications)
 		app.UninstallApps(applications)
 	}
+
+	http.Redirect(w, r, r.URL.Path, http.StatusSeeOther)
 }
 
 func SetupRoutes(port int) {
@@ -48,8 +50,8 @@ func SetupRoutes(port int) {
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
 
 	r.Get("/", serveHome)
-	r.Post("/process", processForm)
+	r.Post("/", processForm)
 
-	fmt.Printf("Application is running on http://localhost:%v \n", port)
+	fmt.Printf("Application is running on http://localhost:%v\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), r))
 }
