@@ -30,7 +30,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Server version:", serverVersion)
+	fmt.Printf("ADB v%v\n", serverVersion)
 
 	devices, err := client.ListDevices()
 	if err != nil {
@@ -41,18 +41,11 @@ func main() {
 		log.Fatal("No device connected.")
 	}
 
-	fmt.Println("Devices:")
-	for _, device := range devices {
-		fmt.Printf("\t%+v\n", *device)
-	}
-
 	descriptor := adb.AnyDevice()
 	device := client.Device(descriptor)
 
 	installedApps := app.InstalledApps(*device)
-	app.DisplayAllApps(installedApps)
 
 	store.SetTemplateData(&installedApps, device)
-
 	routes.SetupRoutes(*listenAddr)
 }
