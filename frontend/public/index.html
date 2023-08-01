@@ -28,6 +28,10 @@
       .device {
         margin-bottom: 4%;
       }
+
+      .button {
+        margin: 1%;
+      }
     </style>
   </head>
 
@@ -36,26 +40,29 @@
       <div class="container-fluid">
         <a class="navbar-brand"><strong>ClearClutter</strong></a>
 
-        <a class="navbar-brand status">Device Status:</a>
-        <button
-          class="btn"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasExample"
-          aria-controls="offcanvasExample"
-        >
-          <svg
-            xmlns="../static/images/mobile-solid.svg"
-            height="2.4em"
-            viewBox="0 0 384 512"
+        <div>
+          <a class="navbar-brand status"
+            ><strong>Device Status: </strong>Connected</a
           >
-            <path
-              d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zm80 432h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
-            />
-          </svg>
-        </button>
-
-        <form class="d-flex" role="search">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+          >
+            <svg
+              xmlns="../static/images/mobile-solid.svg"
+              height="2.4em"
+              viewBox="0 0 384 512"
+            >
+              <path
+                d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zm80 432h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+              />
+            </svg>
+          </button>
+        </div>
+        <form class="d-flex form" role="search">
           <input
             class="form-control me-2"
             type="search"
@@ -139,12 +146,60 @@
         </tbody>
       </table>
 
-      <input
-        class="btn btn-outline-primary"
-        type="submit"
-        value="Uninstall"
-        style="margin-bottom: 2%"
-      />
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-outline-primary button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Uninstall
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to proceed with this action?
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+
+              <input
+                class="btn btn-outline-primary"
+                type="submit"
+                value="Proceed"
+                style="margin-bottom: 2%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
     <script src="../static/js/bootstrap.bundle.min.js"></script>
   </body>
