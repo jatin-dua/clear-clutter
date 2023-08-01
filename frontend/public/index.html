@@ -68,6 +68,7 @@
             type="search"
             placeholder="Search"
             aria-label="Search"
+            id="searchInput"
           />
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
@@ -111,7 +112,7 @@
       </div>
     </div>
 
-    <form method="POST">
+    <form action="/" method="POST">
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
@@ -202,5 +203,29 @@
       </div>
     </form>
     <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const searchInput = document.getElementById("searchInput");
+      const tableRows = document.getElementsByTagName("tr");
+
+      // Event listener for user input in the search input field
+      searchInput.addEventListener("input", function () {
+        // Get the search query from the input field
+        const searchQuery = searchInput.value.toLowerCase();
+
+        // Loop through all the table rows and hide/show them based on the search query
+        for (const row of tableRows) {
+          // Skip the first row, which might be the table header
+          if (row.rowIndex === 0) continue;
+
+          const label = row.getElementsByTagName("label")[0];
+          const labelText = label.innerText.toLowerCase();
+          if (labelText.includes(searchQuery)) {
+            row.style.display = "table-row"; // Show the table row
+          } else {
+            row.style.display = "none"; // Hide the table row
+          }
+        }
+      });
+    </script>
   </body>
 </html>
